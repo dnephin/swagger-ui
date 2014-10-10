@@ -5,6 +5,7 @@ class ContentTypeView extends Backbone.View
     template = @template()
     $(@el).html(template(@model))
 
+    # TODO: dont' do for isReadOnly
     $('label[for=contentType]', $(@el)).text('Response Content Type')
 
     @

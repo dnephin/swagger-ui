@@ -15,6 +15,7 @@ class SignatureView extends Backbone.View
 
     @isParam = @model.isParam
 
+    # TODO: dont' do in isReadOnly
     if @isParam
       $('.notice', $(@el)).text('Click to set as parameter value')
 
