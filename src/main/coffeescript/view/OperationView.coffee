@@ -138,8 +138,6 @@ class OperationView extends Backbone.View
       $(@).removeClass "error"
       if jQuery.trim($(@).val()) is ""
         $(@).addClass "error"
-        $(@).wiggle
-          callback: => $(@).focus()
         error_free = false
 
     # if error free submit it
