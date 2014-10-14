@@ -28,13 +28,17 @@ task 'dist', 'Build a distribution', ->
   fs.mkdirSync('dist') if not path.existsSync('dist')
   fs.mkdirSync('dist/lib') if not path.existsSync('dist/lib')
 
-  appContents = new Array remaining = sourceFiles.length
-  for file, index in sourceFiles then do (file, index) ->
+  # TODO: move to new function
+  appContents = []
+  appContents = for file, index in sourceFiles then do (file, index) ->
     console.log "   : Reading src/main/coffeescript/#{file}.coffee"
     fs.readFile "src/main/coffeescript/#{file}.coffee", 'utf8', (err, fileContents) ->
       throw err if err
-      appContents[index] = fileContents
-      precompileTemplates() if --remaining is 0
+      appContents.push fileContents
+
+  # TODO: trigger on callback
+  precompileTemplates()
+  # TODO: move other functions here
 
   precompileTemplates= ->
     console.log '   : Precompiling templates...'
@@ -132,7 +136,3 @@ task 'watch', 'Watch source files for changes and autocompile', ->
 notify = (message) ->
   return unless message?
   console.log message
-#  options =
-#    title: 'CoffeeScript'
-#    image: 'bin/CoffeeScript.png'
-#  try require('growl') message, options
